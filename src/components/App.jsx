@@ -1,8 +1,29 @@
+import css from 'components/App.module.css';
+import { ContactForm } from './ContactForm/ContactForm';
+import { Filter } from './Filter/Filter';
+import { ContactList } from './ContactList/ContactList';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { selectError, selectIsLoading } from '../redux/selectors/selectors';
+import { ThreeDots } from 'react-loader-spinner';
+import { fetchContacts } from "../redux/operations";
+import { getAllContacts } from 'redux/selectors/selectors';
+
+
 export const App = () => {
+  const contacts = useSelector(getAllContacts);
+  const error = useSelector(selectError);
+  const isLoading = useSelector(selectIsLoading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+
   return (
     <div
       style={{
-        height: '100vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -10,7 +31,14 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      React homework template
+      <div>
+        <h1 className={css.title}>Phonebook</h1>
+        <ContactForm />
+        <h2 className={css.title}>Contacts</h2>
+        <Filter />
+        {isLoading&&!error?<div className={css.loader}><ThreeDots /></div>:<ContactList />}
+        {!contacts.length && <p className={css.messageUser}>There are no contacts in the Phonebook</p>}
+      </div>
     </div>
   );
 };

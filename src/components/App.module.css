@@ -1,0 +1,21 @@
+
+.title{
+        text-align: center;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-weight: 600;
+        font-size: 36px;
+        text-transform: uppercase;
+}
+
+.messageUser{
+        text-align: center;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-weight: 500;
+        font-size: 36px;
+        color: rgb(55, 119, 216);
+}
+
+.loader{
+        display: flex;
+        justify-content: center;
+}
